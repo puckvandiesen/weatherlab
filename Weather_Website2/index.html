@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weer Avontuur</title>
+    <link rel="stylesheet" href="Style.css">
+<script src="Script.js"></script>
+</head>
+<body>
+
+<!-- ============================================= -->
+<!-- SCHERM 1: KAART VAN BELGIË MET LIVE WEER       -->
+<!-- ============================================= -->
+<section id="screen-map" class="screen active">
+
+    <div class="belgium-map">
+        <img src="Images/Belgie_kaart.jpg" class="map-img" alt="Kaart van België">
+
+        <!-- Live weer-markers, geplaatst op basis van de vorm van deze specifieke kaart. -->
+        <div class="weather-marker" style="top:24%; left:27%;">
+            <span class="marker-city">Brugge</span>
+            <span class="marker-temp" id="temp-brugge">--°</span>
+        </div>
+        <div class="weather-marker" style="top:17%; left:43%;">
+            <span class="marker-city">Antwerpen</span>
+            <span class="marker-temp" id="temp-antwerpen">--°</span>
+        </div>
+        <div class="weather-marker" style="top:44%; left:45%;">
+            <span class="marker-city">Brussel</span>
+            <span class="marker-temp" id="temp-brussel">--°</span>
+        </div>
+        <div class="weather-marker" style="top:35%; left:63%;">
+            <span class="marker-city">Luik</span>
+            <span class="marker-temp" id="temp-luik">--°</span>
+        </div>
+    </div>
+
+    <!-- Klikbare mascotte -> leidt naar scherm 2 -->
+    <img src="Images/algemene mascotte.png" class="mascot-guide" id="mapMascot" style="bottom:3%; right:8%;" onclick="showScreen('personas')">
+    <div class="mascot-hint">Psst! Kom je mee op avontuur?</div>
+
+</section>
+
+<!-- ============================================= -->
+<!-- SCHERM 2: DE 5 WOLKEN-PERSONAGES               -->
+<!-- ============================================= -->
+<section id="screen-personas" class="screen">
+
+    <button class="back-btn" onclick="showScreen('map')">Terug</button>
+
+    <!-- De 5 persona-wolken worden hier via Script.js ingevoegd (zie personas-object) -->
+    <div class="persona-field" id="personaField"></div>
+
+    <!-- Extra wolk, GEEN persona -> leidt naar het spel (scherm 3) -->
+    <div class="persona-wrapper trigger-cloud" style="top:45%; left:70%;" onclick="showScreen('game')">
+        <img src="Images/algemene mascotte.png" class="persona-img">
+        <span class="persona-name">?!</span>
+    </div>
+
+    <!-- De speech bubbles worden per persona automatisch aangemaakt in Script.js,
+         vlak naast de wolk die je aanklikt. -->
+</section>
+
+<!-- ============================================= -->
+<!-- SCHERM 3: BOUW-EEN-STORM SPEL                  -->
+<!-- ============================================= -->
+<section id="screen-game" class="screen">
+
+    <button class="back-btn" onclick="showScreen('personas')">Terug</button>
+
+    <!-- Sfeerlagen: elk gestuurd door een ingrediënt, zie updateGameCloud() in Script.js -->
+    <div id="frostOverlay" class="frost-overlay"></div>
+    <div id="darkOverlay" class="dark-overlay"></div>
+    <div id="rainOverlay" class="rain-overlay"></div>
+    <div id="lightningFlash" class="lightning-flash"></div>
+
+    <img src="Images/cumulus_dormant.png" class="game-cloud" id="gameCloud">
+ 
+    <!-- Ingrediënten om naar de wolk te slepen -->
+    <img src="Images/Koud.png" class="ingredient" id="koud" draggable="true" style="left:12%; top:22%;">
+    <img src="Images/Warm.png" class="ingredient" id="warm" draggable="true" style="left:78%; top:22%;">
+    <img src="Images/Water.png" class="ingredient" id="water" draggable="true" style="left:45%; top:78%;">
+
+    <div id="activeElements"></div>
+
+</section>
+
+<!-- ============================================= -->
+<!-- QUIZ POPUP (verschijnt boven elk scherm)       -->
+<!-- ============================================= -->
+<div id="quizModal" class="quiz-modal">
+    <div class="quiz-box">
+        <p id="quizQuestion"></p>
+        <div id="quizOptions"></div>
+        <p id="quizFeedback"></p>
+    </div>
+</div>
+
+<script src="Script.js"></script>
+</body>
+</html>
